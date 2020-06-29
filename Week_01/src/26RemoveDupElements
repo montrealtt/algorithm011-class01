@@ -1,0 +1,38 @@
+
+//双指针解法：
+//指针i从第下标0开始遍历，指针j从下标1开始遍历
+//        if nums[i] = nums[j]，说明重复元素，j++，i不动
+//        反之 i++，将j下标对应的值付给i元素
+
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int i=0;
+        int j=1;
+        while (j<nums.length){
+            if (nums[j]==nums[i]){
+                j++;
+            }
+            else {
+                i++;
+                nums[i]=nums[j];
+            }
+        }
+        return i+1;
+    }
+}
+
+//暴力解法：新建一个数组用于存储原数组去重后的元素
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int[] target = {};
+        int j=0;
+        for (int i=0; i<nums.length; i++){
+            if (nums[i]!=nums[i+1]){
+                target[j]=nums[i];
+                j++;
+            }
+            return j+1;
+        }
+    }
+}
