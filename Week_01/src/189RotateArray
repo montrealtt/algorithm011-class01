@@ -1,0 +1,51 @@
+//暴力解法：
+//创建新数组，将(i+k)%length 放到第1个元素位置，然后再将这个新数组替换到原数组
+//时间复杂度是O(1),空间复杂度是O(n)
+class Solution {
+    public void rotate(int[] nums, int k){
+        int[] target = new int[nums.length];
+        for (int i=0;i<nums.length;i++){
+            target[(i+k)%nums.length]=nums[i];
+        }
+        for (int i=0; i<nums.length; i++){
+            nums[i] = target[i];
+        }
+    }
+}
+
+//暴力解法：
+//旋转k次，每次旋转一位，时间复杂度是O(nk),空间复杂度是O(1)
+class Solution {
+    public void rotate(int[] nums, int k){
+        int prev, temp;
+        for (int i=0;i<k;i++){
+            prev = nums[nums.length-1];
+            for (int j=0; j<nums.length; j++){
+                temp = nums[j];
+                nums[j] = prev;
+                prev = temp;
+            }
+        }
+    }
+}
+
+//使用反转
+//第一次反转整个数组
+//第二次反转0到k-1个元素
+//第三次反转k到数组长度的元素
+public class RotateArray {
+    public void rotate(int[] nums, int k) {
+        k %= nums.length;
+        reverse(nums, 0, nums.length - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, nums.length - 1);
+    }
+    public void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start++;
+            end--;
+        }
+    }
